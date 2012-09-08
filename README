@@ -1,0 +1,6 @@
+The code for my homepage. (Written in Haskell.)
+While not intended as a general framework, it is (in theory) modular enough
+that changes to content or style shouldn't be too much effort; feel free to
+modify it to taste.
+The templates are there more for example than anything else, as any changes in
+content will probably end up wiping them away.
