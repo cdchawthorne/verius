@@ -1,0 +1,13 @@
+Options +ExecCGI
+<IfModule fcgid_module>
+  <Files Verius>
+    SetHandler fcgid-script
+  </Files>
+</IfModule>
+<IfModule mod_rewrite.c>      
+  RewriteEngine on
+  RewriteCond %{REQUEST_URI} !^/~cdchawth/static
+  #RewriteCond %{REQUEST_URI} !^/favicon.ico$
+  RewriteCond %{REQUEST_URI} !^/~cdchawth/Verius/
+  RewriteRule ^(.*)$ /~cdchawth/Verius/$1 [PT]
+</IfModule>

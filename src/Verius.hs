@@ -24,7 +24,7 @@ import HtmlGeneration.BlogHome (blogHomeHtml)
 import HtmlGeneration.BlogPost (blogPostHtml)
 
 ----------------------------------------------------
--- URL PARSING AND DATABASE CONNETION
+-- URL PARSING AND DATABASE CONNECTION
 ----------------------------------------------------
 
 -- TODO: is handleErrors doing anything? I think an error can be induced with
@@ -77,7 +77,7 @@ handleAboutPageRequest :: Templates -> Connection -> CGI CGIResult
 handleAboutPageRequest = makeSimpleHandler aboutPageTemplate
 
 handleBadRequest :: Templates -> Connection -> CGI CGIResult
-handleBadRequest = makeSimpleHandler (\_ -> newSTMP "Well shit.")
+handleBadRequest = makeSimpleHandler (\_ -> newSTMP "Page not found")
 
 ----------------------------------------------------
 -- Database Request Handlers
