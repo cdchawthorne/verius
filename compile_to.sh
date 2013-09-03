@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
 if [[ $# -gt 0 ]]; then
-    target=$(realpath $1)/Verius
+    target=$(realpath $1)/verius
 else
-    target=Verius
+    target=verius
 fi
 
 cd "$(dirname "$(realpath $0)")"
