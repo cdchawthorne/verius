@@ -1,6 +1,7 @@
 import Control.Monad (mapM, (>=>))
 import Control.Monad.Trans (liftIO)
 import Data.Maybe (fromMaybe)
+import System.IO (openFile, hSetEncoding, hGetContents, utf8, IOMode(..))
 
 import Network.FastCGI (runFastCGI, handleErrors, CGI, CGIResult, getVar, output, getInput)
 import Text.Regex.TDFA ((=~))
@@ -128,7 +129,10 @@ handleBlogReplyToComment parentIdNum templates conn =
 
 getTemplate :: String -> IO Template
 getTemplate =
-    readFile . ("templates/" ++) . (++ ".html") >=> return . newSTMP
+    flip openFile ReadMode . ("templates/" ++) . (++ ".html") >=> \h ->
+    hSetEncoding h utf8 >>
+    hGetContents h >>=
+    return . newSTMP
 
 getTemplates :: IO Templates
 getTemplates =

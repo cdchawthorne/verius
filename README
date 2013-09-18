@@ -5,6 +5,7 @@ modify it to taste.
 
 Required Haskell packages:
 hdbc
+hdbc-mysql
 fastcgi
 regex-tdfa
 hstringtemplate
