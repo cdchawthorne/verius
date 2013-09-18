@@ -52,12 +52,12 @@ handleRequest (Just uri)
     where extractPostId = read . (!! 1) . head . (=~ "^/~cdchawth/blog/([0-9]+)/")
           extractCommentId = read . (!! 1) . head . (=~ blogReplyToCommentRegex)
           homePageUri = "/~cdchawth/"
-          blogHomeRegex = "^/~cdchawth/blog/(\\?startAt=[0-9]+)?$"
-          blogPostRegex = "^/~cdchawth/blog/[0-9]+/$"
-          blogReplyToPostRegex = "^/~cdchawth/blog/[0-9]+/reply/$"
-          blogReplyToCommentRegex = "^/~cdchawth/blog/comments/([0-9]+)/reply/$"
-          filesUri = "/~cdchawth/files/"
-          aboutUri = "/~cdchawth/about/"
+          blogHomeRegex = "^/+~cdchawth/+blog/+(\\?startAt=[0-9]+)?$"
+          blogPostRegex = "^/+~cdchawth/+blog/+[0-9]+/*$"
+          blogReplyToPostRegex = "^/+~cdchawth/+blog/+[0-9]+/+reply/*$"
+          blogReplyToCommentRegex = "^/+~cdchawth/+blog/+comments/+([0-9]+)/+reply/*$"
+          filesUri = "/+~cdchawth/+files/*"
+          aboutUri = "/+~cdchawth/+about/*"
 
 ----------------------------------------------------
 -- Simple Request Handlers
