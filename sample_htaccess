@@ -1,9 +1,6 @@
-Options +ExecCGI
-<IfModule fcgid_module>
-  <Files verius>
-    SetHandler fcgid-script
-  </Files>
-</IfModule>
+<Files verius>
+  SetHandler cgi-script
+</Files>
 <IfModule mod_rewrite.c>      
   RewriteEngine on
   RewriteCond %{REQUEST_URI} !^/~cdchawth/static

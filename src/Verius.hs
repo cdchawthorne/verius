@@ -3,7 +3,7 @@ import Control.Monad.Trans (liftIO)
 import Data.Maybe (fromMaybe)
 import System.IO (openFile, hSetEncoding, hGetContents, utf8, IOMode(..))
 
-import Network.FastCGI (runFastCGI, handleErrors, CGI, CGIResult, getVar, output, getInput)
+import Network.CGI (runCGI, handleErrors, CGI, CGIResult, getVar, output, getInput)
 import Text.Regex.TDFA ((=~))
 import Text.StringTemplate (newSTMP)
 import Database.HDBC.MySQL (Connection)
@@ -30,7 +30,7 @@ import HtmlGeneration.BlogPost (blogPostHtml)
 
 -- TODO: is handleErrors doing anything? I think an error can be induced with
 --       a bad SQL query
-main = runFastCGI $ handleErrors $ cgiMain
+main = runCGI $ handleErrors $ cgiMain
 
 cgiMain :: CGI CGIResult
 cgiMain =
