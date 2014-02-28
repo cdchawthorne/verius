@@ -15,7 +15,8 @@ import Data.Time.Clock (UTCTime)
 
 import Database.HDBC (quickQuery', run, toSql, fromSql, SqlValue)
 import Database.HDBC.MySQL (Connection, defaultMySQLConnectInfo, connectMySQL,
-                            MySQLConnectInfo, mysqlDatabase, mysqlUser, mysqlPassword)
+                            MySQLConnectInfo, mysqlDatabase, mysqlUser,
+                            mysqlPassword, mysqlUnixSocket)
 
 import DataTypes (BlogPost(..), BlogComment(..))
 
@@ -24,7 +25,8 @@ getDatabaseConnection = connectMySQL cdchawthSQLConnectInfo
     where cdchawthSQLConnectInfo = defaultMySQLConnectInfo
                 { mysqlDatabase = "cdchawth"
                 , mysqlUser = "cdchawth"
-                , mysqlPassword = "TP5UdOzR4PmdVvUu1fxc"
+                , mysqlPassword = "OkPsMDAafHcpzKHHFdIU"
+                , mysqlUnixSocket = "/var/run/mysqld/mysqld.sock"
                 }
 
 getAllPosts :: Connection -> IO [BlogPost]

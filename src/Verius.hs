@@ -42,23 +42,23 @@ cgiMain =
 handleRequest :: Maybe String -> Templates -> Connection -> CGI CGIResult
 handleRequest Nothing = handleBadRequest
 handleRequest (Just uri)
-    | uri == homePageUri                = handleHomePageRequest
+    | uri =~ homePageRegex              = handleHomePageRequest
     | uri =~ blogHomeRegex              = handleBlogHomeRequest
     | uri =~ blogPostRegex              = handleBlogPostRequest $ extractPostId uri
     | uri =~ blogReplyToPostRegex       = handleBlogReplyToPost $ extractPostId uri
     | uri =~ blogReplyToCommentRegex    = handleBlogReplyToComment $ extractCommentId uri
-    | uri == filesUri                   = handleFilesPageRequest
-    | uri == aboutUri                   = handleAboutPageRequest
+    | uri =~ filesRegex                 = handleFilesPageRequest
+    | uri =~ aboutRegex                 = handleAboutPageRequest
     | otherwise                         = handleBadRequest
-    where extractPostId = read . (!! 1) . head . (=~ "^/~cdchawth/blog/([0-9]+)/")
+    where extractPostId = read . (!! 1) . head . (=~ "^/+~cdchawth/+blog/+([0-9]+)/*")
           extractCommentId = read . (!! 1) . head . (=~ blogReplyToCommentRegex)
-          homePageUri = "/~cdchawth/"
+          homePageRegex = "^/+~cdchawth/*$"
           blogHomeRegex = "^/+~cdchawth/+blog/+(\\?startAt=[0-9]+)?$"
           blogPostRegex = "^/+~cdchawth/+blog/+[0-9]+/*$"
           blogReplyToPostRegex = "^/+~cdchawth/+blog/+[0-9]+/+reply/*$"
           blogReplyToCommentRegex = "^/+~cdchawth/+blog/+comments/+([0-9]+)/+reply/*$"
-          filesUri = "/+~cdchawth/+files/*"
-          aboutUri = "/+~cdchawth/+about/*"
+          filesRegex = "/+~cdchawth/+files/*"
+          aboutRegex = "/+~cdchawth/+about/*"
 
 ----------------------------------------------------
 -- Simple Request Handlers
