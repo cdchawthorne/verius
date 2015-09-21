@@ -49,6 +49,7 @@ handleRequest (Just uri)
     | uri =~ blogReplyToCommentRegex    = handleBlogReplyToComment $ extractCommentId uri
     | uri =~ filesRegex                 = handleFilesPageRequest
     | uri =~ aboutRegex                 = handleAboutPageRequest
+    | uri =~ notesRegex                 = handleNotesPageRequest
     | otherwise                         = handleBadRequest
     where extractPostId = read . (!! 1) . head . (=~ "^/+~cdchawth/+blog/+([0-9]+)/*")
           extractCommentId = read . (!! 1) . head . (=~ blogReplyToCommentRegex)
@@ -59,6 +60,7 @@ handleRequest (Just uri)
           blogReplyToCommentRegex = "^/+~cdchawth/+blog/+comments/+([0-9]+)/+reply/*$"
           filesRegex = "/+~cdchawth/+files/*"
           aboutRegex = "/+~cdchawth/+about/*"
+          notesRegex = "/+~cdchawth/+notes/*"
 
 ----------------------------------------------------
 -- Simple Request Handlers
@@ -76,6 +78,9 @@ handleFilesPageRequest = makeSimpleHandler filesPageTemplate
 
 handleAboutPageRequest :: Templates -> Connection -> CGI CGIResult
 handleAboutPageRequest = makeSimpleHandler aboutPageTemplate
+
+handleNotesPageRequest :: Templates -> Connection -> CGI CGIResult
+handleNotesPageRequest = makeSimpleHandler notesPageTemplate
 
 handleBadRequest :: Templates -> Connection -> CGI CGIResult
 handleBadRequest = makeSimpleHandler (\_ -> newSTMP "Page not found")
@@ -149,6 +154,7 @@ getTemplates =
     getTemplate "blog_header" >>= \blogHeaderT ->
     getTemplate "files_page" >>= \filesPageT ->
     getTemplate "about_page" >>= \aboutPageT ->
+    getTemplate "notes_page" >>= \notesPageT ->
     getTemplate "sidebar" >>= \sidebarT ->
     getTemplate "boilerplate" >>= \boilerplateT ->
     return $ Templates { homePageTemplate = homePageT
@@ -164,6 +170,7 @@ getTemplates =
                        , blogHeaderTemplate = blogHeaderT
                        , filesPageTemplate = filesPageT
                        , aboutPageTemplate = aboutPageT
+                       , notesPageTemplate = notesPageT
                        , sidebarTemplate = sidebarT
                        , boilerplateTemplate = boilerplateT
                        }
