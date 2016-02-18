@@ -25,7 +25,7 @@ getDatabaseConnection = connectMySQL cdchawthSQLConnectInfo
     where cdchawthSQLConnectInfo = defaultMySQLConnectInfo
                 { mysqlDatabase = "cdchawth"
                 , mysqlUser = "cdchawth"
-                , mysqlPassword = "OkPsMDAafHcpzKHHFdIU"
+                , mysqlPassword = "super secret password"
                 , mysqlUnixSocket = "/var/run/mysqld/mysqld.sock"
                 }
 
